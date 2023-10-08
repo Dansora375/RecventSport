@@ -1,6 +1,6 @@
 import LinkedList from "./linkedList"
 export default class cola <T> extends LinkedList <T> {
-  enque (key: T ): void{
+  enqueue (key: T ): void{
     this.pushBack(key)
   }
   dequeue():void{
