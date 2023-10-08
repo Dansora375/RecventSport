@@ -11,12 +11,12 @@ interface evento {
   capacidaMax:number;
   costo?: number;
 }
-const eventsNumeber=10
+const eventsNumeber=1000
 const queue = new cola <evento>()
 const stack = new pila <evento>()
 
 
-export default function pruebaAddInQueue():void{
+export  function pruebaAddInQueue():void{
   
   faker.seed(42)
   console.time("tiempo")
@@ -38,7 +38,7 @@ export default function pruebaAddInQueue():void{
   console.timeEnd("tiempo")
 }
 
-export  function pruebaEliminarInQueue(): void{
+export   function pruebaEliminarInQueue(): void{
   console.time("tiempo eliminar")
   for (let i =0; i<eventsNumeber;i++){
     queue.dequeue()
@@ -67,6 +67,8 @@ export  function pruebaAddInStack():void{
   }
   console.timeEnd("tiempo")
 }
+
+
 export   function pruebaEliminarInStack(): void{
   console.time("tiempo eliminar")
   for (let i =0; i<eventsNumeber;i++){
@@ -76,4 +78,8 @@ export   function pruebaEliminarInStack(): void{
   console.timeEnd("tiempo eliminar")
 }
 
+// ejecucion
+
+pruebaAddInQueue()
+pruebaEliminarInQueue()
 
