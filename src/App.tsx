@@ -1,7 +1,7 @@
-import React from 'react'
-import prueba from './dataEstructures/createEvent'
+
+import pruebaAddInQueue from './dataEstructures/createEvent'
 function App() {
-  prueba()
+  pruebaAddInQueue()
   
   return (
     <div>

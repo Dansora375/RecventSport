@@ -18,7 +18,7 @@ export default class LinkedList<T> {
   }
 
   // PushFront(Key) - Add to front
-  pushFront(key: T): void {
+  protected pushFront(key: T): void {
     const newNode = new ListNode(key);
     if (!this.head) {
       this.head = newNode;
@@ -30,12 +30,12 @@ export default class LinkedList<T> {
   }
 
   // TopFront() - Return front item
-  topFront(): T | null {
+  protected topFront(): T | null {
     return this.head ? this.head.data : null;
   }
 
   // PopFront() - Remove front item
-  popFront(): void {
+  protected popFront(): void {
     if (this.head) {
       this.head = this.head.next;
       if (!this.head) {
@@ -45,7 +45,7 @@ export default class LinkedList<T> {
   }
 
   // PushBack(Key) - Add to back
-  pushBack(key: T): void {
+  protected pushBack(key: T): void {
     const newNode = new ListNode(key);
     if (!this.tail) {
       this.head = newNode;
@@ -57,12 +57,12 @@ export default class LinkedList<T> {
   }
 
   // TopBack() - Return back item
-  topBack(): T | null {
+  protected topBack(): T | null {
     return this.tail ? this.tail.data : null;
   }
 
   // PopBack() - Remove back item
-  popBack(): void {
+  protected popBack(): void {
     if (this.head === this.tail) {
       this.head = null;
       this.tail = null;
@@ -77,7 +77,7 @@ export default class LinkedList<T> {
   }
 
   // Find(Key) - Is key in list?
-  find(key: T): boolean {
+  protected find(key: T): boolean {
     let current = this.head;
     while (current) {
       if (current.data === key) {
@@ -89,7 +89,7 @@ export default class LinkedList<T> {
   }
 
   // Erase(Key) - Remove key from list
-  erase(key: T): void {
+  protected erase(key: T): void {
     if (!this.head) {
       return;
     }
@@ -114,12 +114,12 @@ export default class LinkedList<T> {
   }
 
   // Empty() - Is the list empty?
-  empty(): boolean {
+  protected empty(): boolean {
     return !this.head;
   }
 
   // AddBefore(Node, Key) - Add key before node
-  addBefore(node: T, key: T): void {
+  protected addBefore(node: T, key: T): void {
     if (!this.head) {
       return;
     }
@@ -142,26 +142,4 @@ export default class LinkedList<T> {
   }
 }
 
-// Ejemplo de uso:
-const lista = new LinkedList<number>();
 
-lista.pushFront(2);
-lista.pushFront(1);
-lista.pushBack(3);
-
-console.log(lista.topFront()); // 1
-console.log(lista.topBack()); // 3
-
-lista.popFront();
-console.log(lista.topFront()); // 2
-
-lista.popBack();
-console.log(lista.topBack()); // 2
-
-console.log(lista.find(2)); // true
-console.log(lista.find(4)); // false
-
-lista.erase(2);
-console.log(lista.find(2)); // false
-
-console.log(lista.empty()); // true
