@@ -94,6 +94,37 @@ export   function pruebaEliminarInQueueArray(): void{
   console.timeEnd("tiempo pruebaEliminarInQueueArray")
 }
 
+export   function pruebaSearchInQueue(): void{
+  //Llamamos despues de haber eliminado, por lo tanto tenemos que llenar el queue de nuevo
+  pruebaAddInQueue()
+  const targetId: number = eventsNumeber-5;
+  console.time("tiempo pruebaSearchInQueue")
+  for (let index = 0; index < eventsNumeber; index++) {
+    const temp: evento | null = queue.peek();
+    queue.dequeue;
+    if(temp != null && temp.id==targetId){
+      break;
+    } 
+  }
+  console.timeEnd("tiempo pruebaSearchInQueue")
+}
+
+export   function pruebaSearchInQueueArray(): void{
+  //Llamamos despues de haber eliminado, por lo tanto tenemos que llenar el queue de nuevo
+
+  pruebaAddInQueueArray();
+  const targetId: number = eventsNumeber-5;
+  console.time("tiempo pruebaSearchInQueueArray")
+  for (let index = 0; index < eventsNumeber; index++) {
+    const temp: evento | null = queueArray.peek();
+    queueArray.dequeue();
+    if(temp != null && temp.id==targetId){
+      break;
+    } 
+  }
+  console.timeEnd("tiempo pruebaSearchInQueueArray")
+}
+
 
 export  function pruebaAddInStack():void{
   console.time("tiempo pruebaAddInStack")
@@ -142,6 +173,35 @@ export   function pruebaEliminarInStackArray(): void{
   console.timeEnd("tiempo pruebaEliminarInStackArray")
 }
 
+export   function pruebaSearchInStack(): void{
+  //Llamamos despues de haber eliminado, por lo tanto tenemos que llenar el queue de nuevo
+  pruebaAddInStack()
+  const targetId: number = 2;
+  console.time("tiempo pruebaSearchInStack")
+  for (let index = 0; index < eventsNumeber; index++) {
+    const temp: evento | null = stack.keyTop();
+    stack.pop;
+    if(temp != null && temp.id==targetId){
+      break;
+    } 
+  }
+  console.timeEnd("tiempo pruebaSearchInStack")
+}
+
+export   function pruebaSearchInStackArray(): void{
+  //Llamamos despues de haber eliminado, por lo tanto tenemos que llenar el queue de nuevo
+  pruebaAddInStackArray()
+  const targetId: number = 2;
+  console.time("tiempo pruebaSearchInStackArray")
+  for (let index = 0; index < eventsNumeber; index++) {
+    const temp: evento | null = stackArray.pop();
+    if(temp != null && temp.id==targetId){
+      break;
+    } 
+  }
+  console.timeEnd("tiempo pruebaSearchInStackArray")
+}
+
 export  function pruebaAddInArray():void{
 
   console.time("tiempo insercion array")
@@ -172,22 +232,24 @@ pruebaAddInQueue()
 
 pruebaEliminarInQueue() 
 
+pruebaSearchInQueue()
+
 pruebaAddInQueueArray()
 
 pruebaEliminarInQueueArray()
 
+pruebaSearchInQueueArray()
 
 pruebaAddInStack()
 
-
 pruebaEliminarInStack()
+pruebaSearchInStack()
 
 pruebaAddInStackArray()
 
 pruebaEliminarInStackArray()
+pruebaSearchInStackArray()
 
-
-// ------
-// pruebaAddInArray()
-// pruebaSearchInArray()
+pruebaAddInArray()
+pruebaSearchInArray()
 

@@ -11,8 +11,8 @@ export default class pila <T> extends LinkedList<T> {
     this.popFront()
   }
 
-  keyTop():void {
-    this.topFront()
+  keyTop(): T | null{
+    return this.topFront()
   }
   emptyStack():void{
     this.empty()
