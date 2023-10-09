@@ -5,7 +5,7 @@ import ColaGenerica from './queueArray';
 import PilaGenerica from './stackArray';
 
 interface evento {
-  id?:number,
+  id:number;
   nombre:string;
   description: string;
   deporte: string;
@@ -14,7 +14,9 @@ interface evento {
   capacidaMax:number;
   costo?: number;
 }
-const eventsNumeber=1000
+
+
+const eventsNumeber= 100000
 const queue = new cola <evento>()
 const queueArray = new ColaGenerica <evento>(eventsNumeber)
 const stackArray = new PilaGenerica <evento>(eventsNumeber)
@@ -22,6 +24,9 @@ const stack = new pila <evento>()
 const datosArray: evento[]=new Array(eventsNumeber+7);
 const arr: evento[] = new Array(eventsNumeber + 7);
 
+console.log("numero de eventos: " + eventsNumeber);
+
+console.time("create data");
 
 for (let i =0; i<eventsNumeber;i++){
   faker.seed(42)
@@ -36,10 +41,11 @@ for (let i =0; i<eventsNumeber;i++){
     capacidaMax:faker.number.int({ min: 10, max: 100 }),
     costo:faker.number.int({ min: 1000, max: 10000 })
     }
+    datosArray[i] = event
     
-    datosArray.push(event)
     // console.log(event)
 }
+console.timeEnd("create data")
 
 
 export  function pruebaAddInQueue():void{
@@ -86,6 +92,37 @@ export   function pruebaEliminarInQueueArray(): void{
     
   }
   console.timeEnd("tiempo pruebaEliminarInQueueArray")
+}
+
+export   function pruebaSearchInQueue(): void{
+  //Llamamos despues de haber eliminado, por lo tanto tenemos que llenar el queue de nuevo
+  pruebaAddInQueue()
+  const targetId: number = eventsNumeber-5;
+  console.time("tiempo pruebaSearchInQueue")
+  for (let index = 0; index < eventsNumeber; index++) {
+    const temp: evento | null = queue.peek();
+    queue.dequeue;
+    if(temp != null && temp.id==targetId){
+      break;
+    } 
+  }
+  console.timeEnd("tiempo pruebaSearchInQueue")
+}
+
+export   function pruebaSearchInQueueArray(): void{
+  //Llamamos despues de haber eliminado, por lo tanto tenemos que llenar el queue de nuevo
+
+  pruebaAddInQueueArray();
+  const targetId: number = eventsNumeber-5;
+  console.time("tiempo pruebaSearchInQueueArray")
+  for (let index = 0; index < eventsNumeber; index++) {
+    const temp: evento | null = queueArray.peek();
+    queueArray.dequeue();
+    if(temp != null && temp.id==targetId){
+      break;
+    } 
+  }
+  console.timeEnd("tiempo pruebaSearchInQueueArray")
 }
 
 
@@ -136,50 +173,83 @@ export   function pruebaEliminarInStackArray(): void{
   console.timeEnd("tiempo pruebaEliminarInStackArray")
 }
 
+export   function pruebaSearchInStack(): void{
+  //Llamamos despues de haber eliminado, por lo tanto tenemos que llenar el queue de nuevo
+  pruebaAddInStack()
+  const targetId: number = 2;
+  console.time("tiempo pruebaSearchInStack")
+  for (let index = 0; index < eventsNumeber; index++) {
+    const temp: evento | null = stack.keyTop();
+    stack.pop;
+    if(temp != null && temp.id==targetId){
+      break;
+    } 
+  }
+  console.timeEnd("tiempo pruebaSearchInStack")
+}
+
+export   function pruebaSearchInStackArray(): void{
+  //Llamamos despues de haber eliminado, por lo tanto tenemos que llenar el queue de nuevo
+  pruebaAddInStackArray()
+  const targetId: number = 2;
+  console.time("tiempo pruebaSearchInStackArray")
+  for (let index = 0; index < eventsNumeber; index++) {
+    const temp: evento | null = stackArray.pop();
+    if(temp != null && temp.id==targetId){
+      break;
+    } 
+  }
+  console.timeEnd("tiempo pruebaSearchInStackArray")
+}
+
 export  function pruebaAddInArray():void{
 
-  console.time("tiempo3")
+  console.time("tiempo insercion array")
   for (let i =0; i<eventsNumeber;i++){  
       arr[i] = datosArray[i];
   }
-  console.timeEnd("tiempo3")
+  console.timeEnd("tiempo insercion array")
 
 }
 
 
 export  function pruebaSearchInArray():void{
-
-  const targetId: number = 12;
-
-
-  console.time("tiempo3")
-  arr.find((evento1) => evento1.id == targetId);
-  console.timeEnd("tiempo3")
+  const targetId: number = eventsNumeber-5;
+  console.time("tiempo busqueda en array")
+  for (let index = 0; index < eventsNumeber; index++) {
+    if(datosArray[index].id=== targetId){
+      //console.log(index)
+      break;
+    } 
+  }
+  console.timeEnd("tiempo busqueda en array")
 
 }
 
 // ejecucion
 
-// pruebaAddInQueue()
+pruebaAddInQueue()
 
-// pruebaEliminarInQueue() 
+pruebaEliminarInQueue() 
 
-// pruebaAddInQueueArray()
+pruebaSearchInQueue()
 
-// pruebaEliminarInQueueArray()
+pruebaAddInQueueArray()
 
+pruebaEliminarInQueueArray()
 
-// pruebaAddInStack()
+pruebaSearchInQueueArray()
 
+pruebaAddInStack()
 
-// pruebaEliminarInStack()
+pruebaEliminarInStack()
+pruebaSearchInStack()
 
-// pruebaAddInStackArray()
+pruebaAddInStackArray()
 
-// pruebaEliminarInStackArray()
+pruebaEliminarInStackArray()
+pruebaSearchInStackArray()
 
-
-// ------
 pruebaAddInArray()
 pruebaSearchInArray()
 
