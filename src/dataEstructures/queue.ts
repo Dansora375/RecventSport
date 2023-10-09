@@ -7,8 +7,8 @@ export default class cola <T> extends LinkedList <T> {
     this.topFront()
     this.popFront()
   }
-  peek():void{
-    this.topFront()
+  peek():T|null{
+    return this.topFront()
   }
   emptyqueue(): void {
     this.empty()
