@@ -16,14 +16,62 @@ interface evento {
 }
 
 
-const eventsNumeber= 100000000
+const aray1={
+  id:1,
+  nombre:'camilo',
+  description: 'lore estrein',
+  deporte: 'natacion',
+  fechaHora : 'Sat Aug 24 2024 03:11:35 GMT-0500',
+  ubicacion:'"Abagail Dam"',
+  capacidaMax:123,
+}
+const aray2={
+  id:2,
+  nombre:'camilo',
+  description: 'lore estrein',
+  deporte: 'natacion',
+  fechaHora : 'Sat Aug 24 2024 03:11:35 GMT-0500',
+  ubicacion:'"Abagail Dam"',
+  capacidaMax:123,
+}
+const aray3={
+  id:3,
+  nombre:'camilo',
+  description: 'lore estrein',
+  deporte: 'natacion',
+  fechaHora : 'Sat Aug 24 2024 03:11:35 GMT-0500',
+  ubicacion:'"Abagail Dam"',
+  capacidaMax:123,
+}
+const aray4={
+  id:4,
+  nombre:'camilo',
+  description: 'lore estrein',
+  deporte: 'natacion',
+  fechaHora : 'Sat Aug 24 2024 03:11:35 GMT-0500',
+  ubicacion:'"Abagail Dam"',
+  capacidaMax:123,
+}
+const aray5={
+  id:5,
+  nombre:'camilo',
+  description: 'lore estrein',
+  deporte: 'natacion',
+  fechaHora : 'Sat Aug 24 2024 03:11:35 GMT-0500',
+  ubicacion:'"Abagail Dam"',
+  capacidaMax:123,
+}
+
+
+const eventsNumeber= 5
 const queue = new cola <evento>()
 const queueint = new cola <number>()
 const queueArray = new ColaGenerica <evento>(eventsNumeber)
 const queueArrayint = new ColaGenerica <number>(eventsNumeber)
 const stackArray = new PilaGenerica <evento>(eventsNumeber)
+const stackArray1 = new PilaGenerica <evento>(eventsNumeber)
 const stackArrayint = new PilaGenerica <number>(eventsNumeber)
-const stack = new pila <evento>()
+const stack = new pila <evento | null>()
 const stackint = new pila <number>()
 
 const datosArray: evento[]=new Array(eventsNumeber+7);
@@ -33,26 +81,26 @@ const arrint: number[] = new Array(eventsNumeber + 7);
 
 console.log("numero de eventos: " + eventsNumeber);
 
-// console.time("create data");
+console.time("create data");
 
-// for (let i =0; i<eventsNumeber;i++){
-//   faker.seed(42)
+for (let i =0; i<eventsNumeber;i++){
+  faker.seed(42)
 
-//   const event: evento= {
-//     id: i,
-//     nombre:faker.person.firstName(),
-//     description:faker.lorem.lines({ min: 1, max: 3 }),
-//     deporte: faker.word.adjective(),
-//     fechaHora :faker.date.anytime(),
-//     ubicacion:faker.location.street(),
-//     capacidaMax:faker.number.int({ min: 10, max: 100 }),
-//     costo:faker.number.int({ min: 1000, max: 10000 })
-//     }
-//     datosArray[i] = event
+  const event: evento= {
+    id: i,
+    nombre:faker.person.firstName(),
+    description:faker.lorem.lines({ min: 1, max: 3 }),
+    deporte: faker.word.adjective(),
+    fechaHora :faker.date.anytime(),
+    ubicacion:faker.location.street(),
+    capacidaMax:faker.number.int({ min: 10, max: 100 }),
+    costo:faker.number.int({ min: 1000, max: 10000 })
+    }
+    datosArray[i] = event
     
-//     // console.log(event)
-// }
-// console.timeEnd("create data")
+    // console.log(event)
+}
+console.timeEnd("create data")
 
 
 export  function pruebaAddInQueue():void{
@@ -137,36 +185,6 @@ export   function pruebaEliminarInQueueArray(): void{
   console.timeEnd("tiempo pruebaEliminarInQueueArray")
 }
 
-export   function pruebaSearchInQueue(): void{
-  //Llamamos despues de haber eliminado, por lo tanto tenemos que llenar el queue de nuevo
-  pruebaAddInQueue()
-  const targetId: number = eventsNumeber-5;
-  console.time("tiempo pruebaSearchInQueue")
-  for (let index = 0; index < eventsNumeber; index++) {
-    const temp: evento | null = queue.peek();
-    queue.dequeue;
-    if(temp != null && temp.id==targetId){
-      break;
-    } 
-  }
-  console.timeEnd("tiempo pruebaSearchInQueue")
-}
-
-export   function pruebaSearchInQueueArray(): void{
-  //Llamamos despues de haber eliminado, por lo tanto tenemos que llenar el queue de nuevo
-
-  pruebaAddInQueueArray();
-  const targetId: number = eventsNumeber-5;
-  console.time("tiempo pruebaSearchInQueueArray")
-  for (let index = 0; index < eventsNumeber; index++) {
-    const temp: evento | null = queueArray.peek();
-    queueArray.dequeue();
-    if(temp != null && temp.id==targetId){
-      break;
-    } 
-  }
-  console.timeEnd("tiempo pruebaSearchInQueueArray")
-}
 
 
 //Función con enteros ---------------------------------------------------------------------------------------------------
@@ -188,6 +206,7 @@ export  function pruebaAddInStack():void{
       // console.log(event)
   }
   console.timeEnd("tiempo pruebaAddInStack")
+  console.log(stack)
 }
 
 //Función con enteros ---------------------------------------------------------------------------------------------------
@@ -212,6 +231,28 @@ export  function pruebaAddInStackArray():void{
       // console.log(event)
   }
   console.timeEnd("tiempo pruebaAddInStackArray")
+  console.log(stackArray)
+
+}
+
+export  function pruebaAddInStackArray2():void{
+  // console.time("tiempo pruebaAddInStackArray")
+  // for (let i =0; i<eventsNumeber;i++){
+  //   stackArray.pop()
+  // }
+
+  for (let i =0; i<eventsNumeber;i++){
+
+    if (i==2){
+      continue
+    }else{
+      stackArray1.push(datosArray[i])
+
+    }
+      // console.log(event)
+  }
+  // console.timeEnd("tiempo pruebaAddInStackArray")
+  console.log(stackArray1)
 
 }
 
@@ -259,21 +300,7 @@ export   function pruebaEliminarInStackArray(): void{
   console.timeEnd("tiempo pruebaEliminarInStackArray")
 }
 
-<<<<<<< HEAD
-export   function pruebaSearchInStack(): void{
-  //Llamamos despues de haber eliminado, por lo tanto tenemos que llenar el queue de nuevo
-  pruebaAddInStack()
-  const targetId: number = 2;
-  console.time("tiempo pruebaSearchInStack")
-  for (let index = 0; index < eventsNumeber; index++) {
-    const temp: evento | null = stack.keyTop();
-    stack.pop;
-    if(temp != null && temp.id==targetId){
-      break;
-    } 
-  }
-  console.timeEnd("tiempo pruebaSearchInStack")
-}
+
 
 export   function pruebaSearchInStackArray(): void{
   //Llamamos despues de haber eliminado, por lo tanto tenemos que llenar el queue de nuevo
@@ -288,7 +315,6 @@ export   function pruebaSearchInStackArray(): void{
   }
   console.timeEnd("tiempo pruebaSearchInStackArray")
 }
-=======
 //Función con enteros ---------------------------------------------------------------------------------------------------
 export   function pruebaEliminarInStackArrayEnteros(): void{
 
@@ -300,7 +326,6 @@ export   function pruebaEliminarInStackArrayEnteros(): void{
   console.timeEnd("tiempo pruebaEliminarInStackArrayEnteros")
 }
 
->>>>>>> origin/Diego
 
 export  function pruebaAddInArray():void{
 
@@ -441,21 +466,6 @@ export   function pruebaSearchInStackEnteros(): void{
 }
 
 
-
-export   function pruebaSearchInStackArray(): void{
-  //Llamamos despues de haber eliminado, por lo tanto tenemos que llenar el queue de nuevo
-  pruebaAddInStackArray()
-  const targetId: number = 2;
-  console.time("tiempo pruebaSearchInQueueArray")
-  for (let index = 0; index < eventsNumeber; index++) {
-    const temp: evento | null = stackArray.pop();
-    if(temp != null && temp.id==targetId){
-      break;
-    } 
-  }
-  console.timeEnd("tiempo pruebaSearchInQueueArray")
-}
-
 //Función con enteros ---------------------------------------------------------------------------------------------------
 export   function pruebaSearchInStackArrayEnteros(): void{
   //Llamamos despues de haber eliminado, por lo tanto tenemos que llenar el queue de nuevo
@@ -471,56 +481,75 @@ export   function pruebaSearchInStackArrayEnteros(): void{
   console.timeEnd("tiempo pruebaSearchInStackArrayEnteros")
 }
 
+// -----------------------------------------------------------------------
+
+
+export function AddInStack():void{ 
+  const event: evento= {
+    id: faker.number.int({ min: 1000, max: 10000 }),
+    nombre:faker.person.firstName(),
+    description:faker.lorem.lines({ min: 1, max: 3 }),
+    deporte: faker.word.adjective(),
+    fechaHora :faker.date.anytime(),
+    ubicacion:faker.location.street(),
+    capacidaMax:faker.number.int({ min: 10, max: 100 }),
+    costo:faker.number.int({ min: 1000, max: 10000 })
+    }
+  stack.push(event)
+  console.log(stack)
+}
+
+// const backStack= new PilaGenerica <evento>(10)
+export function craetStack():void{ 
+  
+  // pruebaAddInStackArray2()
+  // console.log(pruebaAddInStackArray2)
+  console.log(aray1)
+  console.log(aray2)
+  console.log(aray3)
+  console.log(aray4)
+  console.log(aray5)
+  
+} 
+
+export function deleteInStack():void{ 
+  
+  // pruebaAddInStackArray2()
+  // console.log(pruebaAddInStackArray2)
+  console.log(aray1)
+  console.log(aray3)
+  console.log(aray4)
+  console.log(aray5)
+  
+} 
+craetStack()
 // ejecucion
 
-pruebaAddInQueueEnteros()
+// pruebaAddInStackArray()
 
-pruebaEliminarInQueueEnteros() 
 
-<<<<<<< HEAD
-pruebaSearchInQueue()
+// pruebaAddInQueueEnteros()
 
-pruebaAddInQueueArray()
-=======
-pruebaAddInQueueArrayEnteros()
->>>>>>> origin/Diego
+// pruebaEliminarInQueueEnteros() 
 
-pruebaEliminarInQueueArrayEnteros()
+// pruebaSearchInQueue()
 
-pruebaSearchInQueueArray()
+// pruebaAddInQueueArray()
 
-pruebaAddInStackEnteros()
+// pruebaEliminarInQueueArrayEnteros()
 
-<<<<<<< HEAD
-pruebaEliminarInStack()
-pruebaSearchInStack()
-=======
+// pruebaSearchInQueueArray()
 
-pruebaEliminarInStackEnteros()
->>>>>>> origin/Diego
+// pruebaAddInStackEnteros()
 
-pruebaAddInStackArrayEnteros()
+// pruebaEliminarInStack()
+// pruebaSearchInStack()
 
-<<<<<<< HEAD
-pruebaEliminarInStackArray()
-pruebaSearchInStackArray()
-=======
-pruebaEliminarInStackArrayEnteros()
+// pruebaAddInStackArrayEnteros()
 
-pruebaSearchInQueueEnteros()
+// pruebaEliminarInStackArray()
+// pruebaSearchInStackArray()
 
-pruebaSearchInQueueArrayEnteros()
-//-------------------------------------------------
-
-pruebaSearchInStackEnteros()
-
-pruebaSearchInStackArrayEnteros()
-
-pruebaAddInArrayEnteros()
-
-pruebaSearchInArrayEnteros()
->>>>>>> origin/Diego
-
-pruebaAddInArray()
-pruebaSearchInArray()
+// pruebaAddInArray()
+// pruebaSearchInArray()
 
