@@ -1,10 +1,41 @@
-import React, { useState } from 'react';
+//import React, { useState } from 'react';
 import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
 
+import React,{ useEffect, useState } from "react";
+import { useCookies } from "react-cookie";
+import { Navigate } from "react-router-dom";
+import axios from "axios";
+//import { Product } from "./product";
 
-type Props = {};
+import { IPost } from "../../../../server/src/models/post";
+import { useGetposts } from "../../hooks/useGetProducts";
+
+interface Props {
+  post: IPost;
+}
+
+
+
+
+
+
+//type Props = {};
 
 const Cardsevents = (props: Props) => {
+  console.log(props);
+  const [cookies, _] = useCookies(["access_token"]);
+
+  const { posts } = useGetposts();
+console.log("xd",posts);
+
+  
+
+  if (!cookies.access_token) {
+      return <Navigate to="/" />;
+  }
+
+  // const { _id, title,image_url, description, level, place,cat,num_inte } =
+  // props.post;
   const list = [
     {
       title: "Orange",
@@ -92,7 +123,7 @@ const Cardsevents = (props: Props) => {
   const [currentPage, setCurrentPage] = useState(1);
 
   // Número de elementos por página
-  const itemsPerPage = 4;
+  const itemsPerPage = 2;
 
   // Función para cambiar a la página siguiente
   const nextPage = () => {
@@ -109,7 +140,7 @@ const Cardsevents = (props: Props) => {
   // Calcular los elementos a mostrar en la página actual
   const startIndex = (currentPage - 1) * itemsPerPage;
   const endIndex = startIndex + itemsPerPage;
-  const itemsToShow = list.slice(startIndex, endIndex);
+  const itemsToShow = posts.slice(startIndex, endIndex);
 
 
   return (
@@ -129,7 +160,7 @@ const Cardsevents = (props: Props) => {
               width="100%"
               alt={item.title}
               className="h-[200px] w-full object-cover"
-              src={item.img}
+              src={item.image_url}
             />
           </CardBody>
           <CardFooter className="flex flex-col items-start text-small">
@@ -144,7 +175,7 @@ const Cardsevents = (props: Props) => {
                 src="https://images.unsplash.com/photo-1491528323818-fdd1faba62cc?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=facearea&facepad=2&w=256&h=256&q=80"
                 alt={item.title}
               />
-              <p className="ml-5 text-default-500">{item.participants} participantes</p>
+              <p className="ml-5 text-default-500">{item.num_inte} participantes</p>
               </div>
               <div className="w-[30%] h-full">
                 <button className="h-full w-full rounded bg-secondary-500 hover:bg-primary-500 hover:text-white">

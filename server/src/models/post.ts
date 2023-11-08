@@ -12,6 +12,7 @@ export interface IPost{
     num_inte: number;
     inte_users: string[];
     author: mongoose.Types.ObjectId;
+    cat: string;
 
 }
 
@@ -20,13 +21,14 @@ const PostSchema = new Schema<IPost>({
     title: {type: String, required: true, unique: true},
     image_url: {type: String, required: true}, 
     description: {type: String, required: true},
-    dateEnd: {type: Date, required: true},
-    dateBeg: {type: Date, required: true},
+    dateEnd: {type: Date, required: false},
+    dateBeg: {type: Date, required: false},
     place: {type: String, required:true},
     level: {type: Number, required:true, min: [0,"level cannot be lower than 0."]},
-    num_inte: {type: Number, default:1},
+    num_inte: {type: Number, default:5},
     inte_users: [{type: Schema.Types.ObjectId, ref: 'users', default: []} ],
-    author: {type: mongoose.Schema.Types.ObjectId, ref: 'users', required:true}
+    author: {type: mongoose.Schema.Types.ObjectId, ref: 'users', required:false},
+    cat: {type: String, required: true} 
 });
 
 export const PostModel = model<IPost>("posts", PostSchema);

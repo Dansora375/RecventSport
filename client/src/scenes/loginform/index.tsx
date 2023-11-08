@@ -88,12 +88,12 @@ const SignIn = ({ isOpen, onClose, signIn, setIsSignIn}: Props) => {
                     >
                         <form onSubmit={handleSubmit2} className="bg-white flex items-center justify-center flex-col py-0 px-[50px] h-full text-center">
                             <h1 className="font-bold text-4xl text-black m-0">Create Account</h1>
-                            <input type="text" />
+                            <input type="text" className="bg-gray-200 border-none py-3 px-4 my-2 w-full" placeholder="Nombre" />
                             <input id="email"
             value={email}
             onChange={(event) => setemail(event.target.value)}   className="bg-gray-200 border-none py-3 px-4 my-2 w-full" type="email" placeholder="Email" />
                             <input value={password}
-            onChange={(event) => setemail(event.target.value)} className="bg-gray-200 border-none py-3 px-4 my-2 w-full" type="password" placeholder="Password" />
+            onChange={(event) => setPassword(event.target.value)} className="bg-gray-200 border-none py-3 px-4 my-2 w-full" type="password" placeholder="Password" />
                             <button type="submit"
                                 className="rounded-[20px] border border-red-500 bg-red-500 text-white text-xs font-bold py-3 px-[45px] tracking-wide uppercase transition-transform duration-75 ease-in active:scale-95 focus:outline-none hover:bg-black hover:border-black"
                             >

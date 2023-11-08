@@ -17,7 +17,7 @@ router.get("/posts", async(_, res: Response) =>{
 
 //implementar con token
 router.post("/create_post", /*verifyToken,*/  async (req: Request , res: Response) => {
-    const {title,image_url,description,place,level} = req.body;
+    const {title,image_url,description,place,level, cat} = req.body;
     try{
         const post: IPost = await PostModel.findOne({title});
 
@@ -26,7 +26,7 @@ router.post("/create_post", /*verifyToken,*/  async (req: Request , res: Respons
         }
 
         const currentDate = new Date();
-        const newPost = new PostModel({ title, image_url, description, date:currentDate, place, level });
+        const newPost = new PostModel({ title, image_url, description, date:currentDate, place, level, cat});
 
         await newPost.save();
 
