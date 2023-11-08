@@ -5,13 +5,17 @@ import Categorias from "@/scenes/mainPage/categorias";
 import ContactUs from "@/scenes/mainPage/contactUs";
 import Footer from "@/scenes/footer";
 import ProfilePage from "@/scenes/profile";
-import Events from "@/scenes/events";
-import SignIn from "@/scenes/signIn";
+import Events from "@/scenes/feedPage";
+import SignIn from "@/scenes/loginform";
+
 
 import { useEffect, useState } from "react";
 import { SelectedPage } from "@/shared/types";
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import {useDisclosure } from "@chakra-ui/react"
+import {NextUIProvider} from "@nextui-org/react";
+import { CreateEvent } from "./scenes/createpage";
+
 
 function App() {
   const [selectedPage, setSelectedPage] = useState<SelectedPage>(
@@ -35,6 +39,7 @@ function App() {
 
 
   return (
+    <NextUIProvider>
     <Router>
       <Routes>
         <Route path="/" element={
@@ -60,8 +65,12 @@ function App() {
         <Route path="/eventos" element={
           <Events />}
         />
+        <Route path="/creareventos" element={
+          <CreateEvent />}
+        />
       </Routes>
     </Router>
+    </NextUIProvider>
   );
 }
 
