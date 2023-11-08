@@ -6,9 +6,10 @@ export default class pila <T> extends LinkedList<T> {
     this.pushFront(value)
 
   }
-  pop():void{
-    this.topFront()
+  pop(): T | null{
+    const pop :T | null= this.topFront()
     this.popFront()
+    return pop
   }
 
   keyTop(): T | null{

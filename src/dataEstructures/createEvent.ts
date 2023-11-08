@@ -16,51 +16,51 @@ interface evento {
 }
 
 
-const aray1={
-  id:1,
-  nombre:'camilo',
-  description: 'lore estrein',
-  deporte: 'natacion',
-  fechaHora : 'Sat Aug 24 2024 03:11:35 GMT-0500',
-  ubicacion:'"Abagail Dam"',
-  capacidaMax:123,
-}
-const aray2={
-  id:2,
-  nombre:'camilo',
-  description: 'lore estrein',
-  deporte: 'natacion',
-  fechaHora : 'Sat Aug 24 2024 03:11:35 GMT-0500',
-  ubicacion:'"Abagail Dam"',
-  capacidaMax:123,
-}
-const aray3={
-  id:3,
-  nombre:'camilo',
-  description: 'lore estrein',
-  deporte: 'natacion',
-  fechaHora : 'Sat Aug 24 2024 03:11:35 GMT-0500',
-  ubicacion:'"Abagail Dam"',
-  capacidaMax:123,
-}
-const aray4={
-  id:4,
-  nombre:'camilo',
-  description: 'lore estrein',
-  deporte: 'natacion',
-  fechaHora : 'Sat Aug 24 2024 03:11:35 GMT-0500',
-  ubicacion:'"Abagail Dam"',
-  capacidaMax:123,
-}
-const aray5={
-  id:5,
-  nombre:'camilo',
-  description: 'lore estrein',
-  deporte: 'natacion',
-  fechaHora : 'Sat Aug 24 2024 03:11:35 GMT-0500',
-  ubicacion:'"Abagail Dam"',
-  capacidaMax:123,
-}
+// const aray1={
+//   id:1,
+//   nombre:'camilo',
+//   description: 'lore estrein',
+//   deporte: 'natacion',
+//   fechaHora : 'Sat Aug 24 2024 03:11:35 GMT-0500',
+//   ubicacion:'"Abagail Dam"',
+//   capacidaMax:123,
+// }
+// const aray2={
+//   id:2,
+//   nombre:'camilo',
+//   description: 'lore estrein',
+//   deporte: 'natacion',
+//   fechaHora : 'Sat Aug 24 2024 03:11:35 GMT-0500',
+//   ubicacion:'"Abagail Dam"',
+//   capacidaMax:123,
+// }
+// const aray3={
+//   id:3,
+//   nombre:'camilo',
+//   description: 'lore estrein',
+//   deporte: 'natacion',
+//   fechaHora : 'Sat Aug 24 2024 03:11:35 GMT-0500',
+//   ubicacion:'"Abagail Dam"',
+//   capacidaMax:123,
+// }
+// const aray4={
+//   id:4,
+//   nombre:'camilo',
+//   description: 'lore estrein',
+//   deporte: 'natacion',
+//   fechaHora : 'Sat Aug 24 2024 03:11:35 GMT-0500',
+//   ubicacion:'"Abagail Dam"',
+//   capacidaMax:123,
+// }
+// const aray5={
+//   id:5,
+//   nombre:'camilo',
+//   description: 'lore estrein',
+//   deporte: 'natacion',
+//   fechaHora : 'Sat Aug 24 2024 03:11:35 GMT-0500',
+//   ubicacion:'"Abagail Dam"',
+//   capacidaMax:123,
+// }
 
 
 const eventsNumeber= 5
@@ -500,29 +500,29 @@ export function AddInStack():void{
 }
 
 // const backStack= new PilaGenerica <evento>(10)
-export function craetStack():void{ 
+// export function craetStack():void{ 
   
-  // pruebaAddInStackArray2()
-  // console.log(pruebaAddInStackArray2)
-  console.log(aray1)
-  console.log(aray2)
-  console.log(aray3)
-  console.log(aray4)
-  console.log(aray5)
+//   // pruebaAddInStackArray2()
+//   // console.log(pruebaAddInStackArray2)
+//   console.log(aray1)
+//   console.log(aray2)
+//   console.log(aray3)
+//   console.log(aray4)
+//   console.log(aray5)
   
-} 
+// } 
 
-export function deleteInStack():void{ 
+// export function deleteInStack():void{ 
   
-  // pruebaAddInStackArray2()
-  // console.log(pruebaAddInStackArray2)
-  console.log(aray1)
-  console.log(aray3)
-  console.log(aray4)
-  console.log(aray5)
+//   // pruebaAddInStackArray2()
+//   // console.log(pruebaAddInStackArray2)
+//   console.log(aray1)
+//   console.log(aray3)
+//   console.log(aray4)
+//   console.log(aray5)
   
-} 
-craetStack()
+// } 
+// craetStack()
 // ejecucion
 
 // pruebaAddInStackArray()

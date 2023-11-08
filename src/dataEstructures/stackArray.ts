@@ -39,4 +39,11 @@ export default class PilaGenerica<T> {
   len(): number {
     return this.top;
   }
+
+  keyTop():T{
+    if (this.empty()) {
+      throw new Error("Stack is empty");
+    }
+    return this.sarray[this.top];
+  }
 }
