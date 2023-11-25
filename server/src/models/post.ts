@@ -1,3 +1,4 @@
+////xd new commint
 import mongoose, { Schema, model } from "mongoose";
 
 export interface IPost{
