@@ -129,25 +129,25 @@ class AVLTree {
   }
 }
 
-function printLevelOrder(root: TreeNode | null): void {
-  if (root === null) return;
+// function printLevelOrder(root: TreeNode | null): void {
+//   if (root === null) return;
 
-  const queue: TreeNode[] = [];
-  queue.push(root);
+//   const queue: TreeNode[] = [];
+//   queue.push(root);
 
-  while (queue.length > 0) {
-    const node = queue.shift() as TreeNode;
-    console.log(node.value);
+//   while (queue.length > 0) {
+//     const node = queue.shift() as TreeNode;
+//     console.log(node.value);
 
-    if (node.left !== null) {
-      queue.push(node.left);
-    }
+//     if (node.left !== null) {
+//       queue.push(node.left);
+//     }
 
-    if (node.right !== null) {
-      queue.push(node.right);
-    }
-  }
-}
+//     if (node.right !== null) {
+//       queue.push(node.right);
+//     }
+//   }
+// }
 
 export function pruebaAvl(){
   

@@ -1,5 +1,34 @@
+// interface Evento {
+//   id:number;
+//   nombre:string;
+//   description: string;
+//   deporte: string;
+//   fechaHora : Date;
+//   ubicacion:string;
+//   capacidaMax:number;
+//   ranting:number;
+//   costo?: number;
+//   integrantes: number
+// }
+
+export interface IPost{
+  _id?: string;
+  title: string;
+  image_url: string;
+  cat: number;        // 1, 2,3,4
+  description: string;
+  date: Date;     ///
+  city: number;  /// 1: Bogota 2:Medellin
+  level: number;   /// 1,2,3
+  num_members: number;
+  members: string[];
+  author: string,
+  authorPFP: string;
+  authorName: string;
+
+}
 export default class MaxHeap {
-  private Heap: number[];
+  private Heap: IPost[];
   private size: number;
   private maxsize: number;
 
@@ -31,14 +60,17 @@ export default class MaxHeap {
     this.Heap[spos] = tmp;
   }
 
-  private maxHeapify(pos: number): void {
-    if (this.isLeaf(pos)) return;
 
+  private maxHeapify(pos: number): void {
+    if (this.isLeaf(pos) || this.Heap[pos] === undefined) return;
+  
+    const currentnum_members = this.Heap[pos]?.num_members || 0;
+  
     if (
-      this.Heap[pos] < this.Heap[this.leftChild(pos)] ||
-      this.Heap[pos] < this.Heap[this.rightChild(pos)]
+      currentnum_members < (this.Heap[this.leftChild(pos)]?.num_members || 0) ||
+      currentnum_members < (this.Heap[this.rightChild(pos)]?.num_members || 0)
     ) {
-      if (this.Heap[this.leftChild(pos)] > this.Heap[this.rightChild(pos)]) {
+      if ((this.Heap[this.leftChild(pos)]?.num_members || 0) > (this.Heap[this.rightChild(pos)]?.num_members || 0)) {
         this.swap(pos, this.leftChild(pos));
         this.maxHeapify(this.leftChild(pos));
       } else {
@@ -47,15 +79,15 @@ export default class MaxHeap {
       }
     }
   }
-
-  public insert(element: number): void {
+  public insert(element: IPost): void {
     this.Heap[this.size] = element;
 
     let current = this.size;
-    while (this.Heap[current] > this.Heap[this.parent(current)]) {
+    while (current > 0 && this.Heap[current].num_members > this.Heap[this.parent(current)].num_members) {
       this.swap(current, this.parent(current));
       current = this.parent(current);
     }
+    
     this.size++;
   }
 
@@ -73,7 +105,7 @@ export default class MaxHeap {
     }
   }
 
-  public extractMax(): number {
+  public extractMax(): IPost {
     const popped = this.Heap[0];
     this.Heap[0] = this.Heap[--this.size];
     this.maxHeapify(0);
@@ -81,19 +113,3 @@ export default class MaxHeap {
   }
 }
 
-// console.log("The Max Heap is ");
-// const maxHeap = new MaxHeap(15);
-
-// maxHeap.insert(5);
-// maxHeap.insert(3);
-// maxHeap.insert(17);
-// maxHeap.insert(10);
-// maxHeap.insert(84);
-// maxHeap.insert(19);
-// maxHeap.insert(6);
-// maxHeap.insert(22);
-// maxHeap.insert(9);
-
-// maxHeap.print();
-
-// console.log("The max val is " + maxHeap.extractMax());

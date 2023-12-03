@@ -1,7 +1,9 @@
 
 
 import {pruebaAddInQueue}  from './dataEstructures/createEvent'
+import { insertNoti, showNotis } from './dataEstructures/final'
 import { pruebaAvl } from './noLinealDtEstructures/AvlPrueba'
+import { insertEvent, pruebHashT } from './noLinealDtEstructures/hashTable'
 import {MaxRanking, insertMaxHeap}  from './noLinealDtEstructures/ranking'
 import { insertAvlObj, printLevelOrder, pruebaAvlConObjetos, searchtAvlObj } from './pruebasConObjetos/avlConObjeto'
 import { InserUnionEvents, findEvents } from './pruebasConObjetos/disjoinSetConObjetos'
@@ -12,22 +14,22 @@ function App() {
   return (
     <div>
       <div>Helo word</div>
-      <button className='p-8' onClick={insertMaxHeap} >insertMaxHeap</button> 
-      {/* <button className='p-8' onClick={pruebaAddInQueue} >eliminar evento</button>  */}
-      <button className='p-8' onClick={MaxRanking} >MaxRanking</button> 
+      <button  className='p-8' onClick={insertMaxHeap} >insertMaxHeap and show</button> 
+      <button className='p-8' onClick={insertNoti} >insert and show notis gen</button> 
+      <button className='p-8' onClick={showNotis} >show notis</button> 
+
+
+
+
+
+      {/* <button className='p-8' onClick={MaxRanking} >MaxRanking</button>  */}
       <button className='p-8' onClick={insertAvlObj} >insertAvlObj</button> 
       <button className='p-8' onClick={searchtAvlObj} >searchtAvlObj</button> 
-      <button className='p-8' onClick={InserUnionEvents} >InserUnionEvents</button> 
-      <button className='p-8' onClick={findEvents} >findEvents</button> 
-    
-      {/* <button className='p-8' onClick={pruebaAddInQueue} >pruebaAddInQueue</button> 
-      <button className='p-8' onClick={pruebaAddInStack} >pruebaAddInStack</button>  */}
-      {/* <button className='p-8' onClick={pruebaAddInQueueArray} >pruebaAddInQueue</button> 
-      <button className='p-8' onClick={pruebaAddInStackArray} >pruebaAddInStack</button> 
-      <button className='p-8' onClick={pruebaEliminarInQueue} >pruebaEliminarInQueue</button> 
-      <button className='p-8' onClick={pruebaEliminarInStack} >pruebaEliminarInStack</button> 
-      <button className='p-8' onClick={pruebaEliminarInQueueArray} >pruebaEliminarInQueue</button> 
-      <button className='p-8' onClick={pruebaEliminarInStackArray} >pruebaEliminarInStack</button>  */}
+      <button className='p-8' onClick={insertEvent} >hash table </button> 
+      {/* <button className='p-8' onClick={InserUnionEvents} >InserUnionEvents</button>  */}
+      {/* <button className='p-8' onClick={findEvents} >findEvents</button>  */}
+
+ 
       
       
     </div>

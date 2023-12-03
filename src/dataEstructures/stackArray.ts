@@ -3,7 +3,7 @@ export default class PilaGenerica<T> {
   private top: number;
   private sarray: T[];
 
-  constructor(n: number = PilaGenerica.N) {
+    constructor(n: number = PilaGenerica.N) {
     this.top = 0;
     this.sarray = new Array<T>(n);
   }

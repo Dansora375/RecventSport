@@ -9,19 +9,36 @@ interface Evento {
   fechaHora : Date;
   ubicacion:string;
   capacidaMax:number;
-  ranking:number;
+  ranting:number;
   costo?: number;
   integrantes: number
 }
 
-const numPruebas=500000;
+export interface IPost{
+  _id?: string;
+  title: string;
+  image_url: string;
+  cat: number;        // 1, 2,3,4
+  description: string;
+  date: Date;     ///
+  city: number;  /// 1: Bogota 2:Medellin
+  level: number;   /// 1,2,3
+  num_members: number;
+  members: string[];
+  author: string,
+  authorPFP: string;
+  authorName: string;
+
+}
+
+const numPruebas=5;
 const datosArray: Evento[]=new Array(numPruebas+7);
 const maxHeap= new MaxHeap(numPruebas); 
 
 
 
 function crearDatosFaker(){
-  faker.seed(42)
+  faker.seed(30)
   // const numPruebas=10;
   
   for (let i =0; i<numPruebas;i++){
@@ -33,22 +50,31 @@ function crearDatosFaker(){
     deporte: faker.word.adjective(),
     fechaHora :faker.date.anytime(),
     ubicacion:faker.location.street(),
-    ranking:faker.number.int({ min: 0, max: 100 }),
+    ranting:faker.number.int({ min: 0, max: 100 }),
     capacidaMax:faker.number.int({ min: 10, max: 100 }),
     costo:faker.number.int({ min: 1000, max: 10000 }),
     integrantes: faker.number.int({ min:1, max:30})
     }
 
-    datosArray[i]=event;
+    // datosArray[i]=event;
+    // maxHeap.insert(event)
   }
 }
+
+
 export function insertMaxHeap(){
   crearDatosFaker()
-  console.time("insertMaxHeap")
-  for(let j=0; j<numPruebas; j++){
-    maxHeap.insert(datosArray[j].ranking)
+  maxHeap.print()
+
+  for (let i =0; i<numPruebas; i++){
+    console.log(maxHeap.extractMax())
+    
   }
-  console.timeEnd("insertMaxHeap")
+  // console.time("insertMaxHeap")
+  // for(let j=0; j<numPruebas; j++){
+  //   maxHeap.insert(datosArray[j])
+  // }
+  // console.timeEnd("insertMaxHeap")
 }
 
 
