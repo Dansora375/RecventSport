@@ -73,8 +73,6 @@ const SignIn = ({ isOpen, onClose, signIn, setIsSignIn}: Props) => {
       };
 
 
-
-
     return (
         <Modal isOpen={isOpen} onClose={onClose} isCentered >
             <ModalOverlay className="bg-[#000] !opacity-20" />
