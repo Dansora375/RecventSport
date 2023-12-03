@@ -15,6 +15,7 @@ export interface IUser{
     num_followers: number;
     friends: string[];
     posts: string[];
+    inter_posts: string[];
 }
 
 const placeHolder = "...";
@@ -34,7 +35,9 @@ const UserSchema = new Schema<IUser>({
     city: { type: Number, required: false , default: numPlaceHolder},
     num_followers: { type: Number, required: false , default: 4},
     friends: [{ type: Schema.Types.ObjectId, ref: 'users', default: [] }],
-    posts: [{ type: Schema.Types.ObjectId, ref: 'posts', default: [] }]
+    posts: [{ type: Schema.Types.ObjectId, ref: 'posts', default: [] }],
+    inter_posts: [{ type: Schema.Types.ObjectId, ref: 'posts', default: [] }]
+    
     
 
 });

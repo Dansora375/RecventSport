@@ -3,7 +3,10 @@ import { IPost, PostModel } from "../models/post";
 import { verifyToken } from "./user";
 import { PostErrors } from "../errors";
 import jwt from "jsonwebtoken";
-import { UserModel } from "../models/user";
+//import { UserModel } from "../models/user";
+
+import { IUser, UserModel } from '../models/user';
+import { UserErrors } from '../errors';
 
 const router = Router()
 
@@ -19,7 +22,7 @@ router.get("/posts", async(_, res: Response) =>{
 
 //implementar con token
 router.post("/create_post", /*verifyToken,*/  async (req: Request , res: Response) => {
-    const {title,image_url,cat, description, date, city, level} = req.body;
+    const {title,image_url,cat, description, date, city, level, idAuthor} = req.body;
     try{
         const post: IPost = await PostModel.findOne({title});
         if(post){
@@ -60,15 +63,16 @@ router.post("/create_post", /*verifyToken,*/  async (req: Request , res: Respons
         const new_date = new Date(date);
 
 
-        const authorToken = req.headers.authorization;
-        let newAuthor;
-        console.log(authorToken);
-        try {
-            let payload = jwt.verify(authorToken, "secret");
-            newAuthor = payload.id; // Esto imprimirá la id del usuario
-        } catch(err) {
-            console.error(err);
-        }
+        // const authorToken = req.headers.authorization;
+        // let newAuthor;
+        // console.log(authorToken);
+        // try {
+        //     let payload = jwt.verify(authorToken, "secret");
+        //     newAuthor = payload.id; // Esto imprimirá la id del usuario
+        // } catch(err) {
+        //     console.error(err);
+        // }
+        let newAuthor = idAuthor;
         let authorPFP;
         let authorName;
         let target;
@@ -89,6 +93,27 @@ router.post("/create_post", /*verifyToken,*/  async (req: Request , res: Respons
         const newPost = new PostModel({ title, image_url,cat: newCat, description, date:new_date, city: newCity, level: newLevel, author: newAuthor, authorName, authorPFP});
 
         await newPost.save();
+
+
+//         ///// YA CREAMOS EL POST AHORA SE LO AÑADIMOS AL USUARUIO
+//         const id: string = (await PostModel.findOne({title}))._id;
+
+//         let nuevoObjectId = "el nuevo ObjectId que quieres añadir al arreglo";
+
+// PostModel.findOneAndUpdate(
+//     { _id: idDelPost }, 
+//     { $push: { arregloDeObjectIds: nuevoObjectId } },
+//     { new: true }, 
+//     function(err, result) {
+//         if (err) {
+//             console.log("Hubo un error: ", err);
+//         } else {
+//             console.log("Post actualizado exitosamente: ", result);
+//         }
+//     }
+// );
+
+        
 
         res.json({message: "Event Created"});
 

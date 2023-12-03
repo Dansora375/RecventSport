@@ -27,7 +27,7 @@ const PostSchema = new Schema<IPost>({
     date: {type: Date, required: true},
     city: {type: Number, required:true},
     level: {type: Number, required:true, min: [0,"level cannot be lower than 0."]},
-    num_members: {type: Number, default:0},
+    num_members: {type: Number, default:1},
     members: [{type: Schema.Types.ObjectId, ref: 'users', default: []} ],
     author: {type: mongoose.Schema.Types.ObjectId, ref: 'users', required:true},
     authorPFP: {type: String, required:true},

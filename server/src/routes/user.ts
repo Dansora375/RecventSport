@@ -47,13 +47,20 @@ router.post("/login", async (req: Request , res: Response) => {
             return res.status(400).json({type: UserErrors.WRONG_CREDENTIALS});
         }
 
-        const token = jwt.sign({id: user._id} , "secret");
-        res.json({token, userID: user._id});
+        //const token = jwt.sign({id: user._id} , "secret");
+  
+        res.json({user});
 
     }catch (err){
         res.status(500).json({type: err});
     }
 });
+
+
+/// ADD TO POSTS WHEN A YOU CREATE A POST
+
+
+
 
 export const verifyToken = (req: Request , res: Response, next: NextFunction) => {
     const authHeader = req.headers.authorization;
