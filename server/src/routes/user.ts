@@ -8,7 +8,7 @@ import { verify } from 'crypto';
 const router = Router();
 
 router.post("/register", async (req: Request, res: Response) => {
-    const {email, password} = req.body;
+    const {email, password, name} = req.body;
 
     try{
         const user = await UserModel.findOne({email}); // ({emial : email})
@@ -18,11 +18,12 @@ router.post("/register", async (req: Request, res: Response) => {
         }
 
         const hashedPassword = await bcrypt.hash(password, 10);
-        const newUser = new UserModel({ email, password: hashedPassword });
+        const newUser = new UserModel({ email, password: hashedPassword, name });
         await newUser.save();
 
         res.json({message: "User Registered Succesfully"});
     } catch(err){
+        console.log(err);
         res.status(500).json({type: err});
     }
 
