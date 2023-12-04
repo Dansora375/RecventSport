@@ -13,6 +13,7 @@ import { IPost } from "../../../../server/src/models/post";
 import { useGetposts } from "../../hooks/useGetProducts";
 import { useCookies } from "react-cookie";
 import { Navigate } from "react-router-dom";
+import MaxHeap from "../../shared/rating";
 
 interface Props {
   post: IPost;
@@ -20,6 +21,7 @@ interface Props {
 
 const Leftpanel = (props: Props) => {
   const [open, setOpen] = useState(true);
+
   const Menus = [
     {
       title: "Comunidades",
@@ -59,6 +61,16 @@ const Leftpanel = (props: Props) => {
 
   const { posts } = useGetposts();
 
+  const maxHeap = new MaxHeap(posts.length);
+  for(const element of posts){
+    maxHeap.insert(element);
+  }
+
+  const rating = [];
+  for(let i=0;i<= posts.length;i++){
+    rating.push(maxHeap.extractMax())
+  }
+
   if (!cookies.access_token) {
     return <Navigate to="/" />;
   }
@@ -74,7 +86,7 @@ const Leftpanel = (props: Props) => {
         setCurrentArray(posts);
         break;
       case 2:
-        setCurrentArray(posts);
+        setCurrentArray(rating);
         break;
       case 3:
         setCurrentArray(posts);
@@ -91,6 +103,10 @@ const Leftpanel = (props: Props) => {
     }
   }, [posts]);
   
+
+
+
+
   return (
     <div className="relative ml-3 h-screen w-[80px] p-5 pt-8 duration-300 md:w-full">
       <img
