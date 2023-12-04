@@ -1,13 +1,9 @@
-import More from "../icons/more";
-import SLike from "../icons/likesmall";
-import CommentButton from "../icons/lovesmall";
 import { Tabs, Tab, Chip, useDisclosure } from "@nextui-org/react";
 
 import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
 import { useEffect, useState, useContext} from "react";
 import { useCookies } from "react-cookie";
 import { Link, Navigate } from "react-router-dom";
-import axios from "axios";
 
 import { IPost } from "../../../../../server/src/models/post";
 import { useGetposts } from "../../../hooks/useGetProducts";
@@ -23,12 +19,14 @@ interface Props {
     
 export default function MainPost() {
   const { user, setUser } = useContext(UserContext);
+  const [creados, setCreados] = useState([]);
   useEffect(() => {
     const storedUser = window.localStorage.getItem("user");
     if (storedUser && !user) {
       setUser(JSON.parse(storedUser));
     }
   }, [user, setUser]);
+
   // const storedUser = window.localStorage.getItem("user");
     // if (storedUser && !user) {
     //   setUser(JSON.parse(storedUser));
@@ -48,15 +46,21 @@ export default function MainPost() {
   const { posts } = useGetposts();
   const map = new Mapgene<string, IPost>();
 
-  for(const element of posts){
-    map.add(element._id, element)
-  }
-  // console.log(map.get("656cf388ef1b1505fa36bd7"));
-  const creados = []  
-  const userPosts = user.user.posts
-  for(const element of userPosts){
-    creados.push(map.get(element))
-  }
+  // console.log(map.get("656cf388ef1b1505fa36bd7")); 
+
+  useEffect(() => {
+    if (user) {
+      for(const element of posts){
+        map.add(element._id, element)
+      }
+      const userPosts = user.user.posts
+      const creadosTemp = [];
+      for(const element of userPosts){
+        creadosTemp.push(map.get(element))
+      }
+      setCreados(creadosTemp);
+    }
+  }, [user, posts]);
 
   // console.log(map.isEmpty())
 
@@ -194,7 +198,7 @@ export default function MainPost() {
                         </div>
                         <div className="h-full w-[30%]">
                           <button className="h-full w-full rounded bg-secondary-500 hover:bg-primary-500 hover:text-white">
-                            Unirse
+                            Unido
                           </button>
                         </div>
                       </div>
