@@ -48,12 +48,33 @@ router.post("/login", async (req: Request , res: Response) => {
         }
 
         //const token = jwt.sign({id: user._id} , "secret");
-  
-        res.json({user});
+        let favCat;
+        switch(user.favCat){
+            case 1: favCat = "Futbol";
+                break;
+            case 2: favCat = "Baloncesto";
+                break;
+            case 3: favCat = "VolleyBall";
+                break;
+            default: favCat = "Natación";
+        }
+
+
+        let city;
+        switch(user.city){
+            case 1: city = "Bogota";
+            break;
+            default: city = "Medellin";
+        }
+        //const token = jwt.sign({id: user._id} , "secret");
+
+        res.json({user, city, favCat });
 
     }catch (err){
         res.status(500).json({type: err});
     }
+  
+
 });
 
 
