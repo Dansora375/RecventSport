@@ -23,13 +23,13 @@ export default function TimelineHeader() {
     <div className="mt-4 px-44 shadow">
       <div className="relative flex h-80 justify-center rounded-b">
         <img
-          src="https://picsum.photos/id/1018/3000"
+          src={user.user.backgroundPic}
           className="h-full w-full rounded-lg object-cover"
           alt="cover"
         />
         <div className="absolute -bottom-8">
           <img
-            src="https://picsum.photos/id/1005/1000"
+            src={user.user.profilePic}
             className="h-40 w-40 rounded-full border-4 border-white object-cover"
             alt="cover"
           />

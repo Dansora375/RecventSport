@@ -4,7 +4,7 @@ import CommentButton from "../icons/lovesmall";
 import { Tabs, Tab, Chip, useDisclosure } from "@nextui-org/react";
 
 import { Card, CardBody, CardFooter, Image } from "@nextui-org/react";
-import React, { useEffect, useState } from "react";
+import { useEffect, useState, useContext} from "react";
 import { useCookies } from "react-cookie";
 import { Link, Navigate } from "react-router-dom";
 import axios from "axios";
@@ -14,15 +14,35 @@ import { useGetposts } from "../../../hooks/useGetProducts";
 
 import {Mapgene } from "@/structures/HastTable";
 
+import { UserContext } from "@/shared/usercontext";
 
 interface Props {
   post: IPost;
 }
 
-
     
-
 export default function MainPost() {
+  const { user, setUser } = useContext(UserContext);
+  useEffect(() => {
+    const storedUser = window.localStorage.getItem("user");
+    if (storedUser && !user) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, [user, setUser]);
+  // const storedUser = window.localStorage.getItem("user");
+    // if (storedUser && !user) {
+    //   setUser(JSON.parse(storedUser));
+    // }
+  // console.log(storedUser)
+  // console.log(JSON.parse(storedUser))
+
+  // let storedUser;
+  // try {
+  //   storedUser = JSON.parse(window.localStorage.getItem("user"));
+  // } catch (error) {
+  //   console.error("Error parsing user from localStorage", error);
+  // }
+
   const [cookies, _] = useCookies(["access_token"]);
 
   const { posts } = useGetposts();
@@ -30,9 +50,15 @@ export default function MainPost() {
 
   for(const element of posts){
     map.add(element._id, element)
-    //console.log(element);
   }
-  console.log(map.get("656cf388ef1b1505fa36bd7"));
+  // console.log(map.get("656cf388ef1b1505fa36bd7"));
+  const creados = []  
+  const userPosts = user.user.posts
+  for(const element of userPosts){
+    creados.push(map.get(element))
+  }
+
+  // console.log(map.isEmpty())
 
   ////
 
@@ -91,14 +117,15 @@ export default function MainPost() {
     {
       id: "espera",
       label: "En Espera",
-      array: [],
+      array: itemsToShow,
     },
     {
       id: "creado",
       label: "Creados",
-      array: itemsToShow,
+      array: creados,
     },
   ];
+
 
   return (
     <div className="shadow-fb flex w-full flex-col rounded-xl bg-white p-4">
@@ -162,7 +189,7 @@ export default function MainPost() {
                             alt={item.title}
                           />
                           <p className="ml-5 text-default-500">
-                            {item.num_inte} participantes
+                            {item.num_members} participantes
                           </p>
                         </div>
                         <div className="h-full w-[30%]">
