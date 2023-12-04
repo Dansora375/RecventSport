@@ -16,6 +16,9 @@ import {useDisclosure } from "@chakra-ui/react"
 import {NextUIProvider} from "@nextui-org/react";
 import { CreateEvent } from "./scenes/createpage";
 
+import { UserContext } from '@/shared/usercontext'; // Asegúrate de importar el contexto
+import React from "react";
+
 
 function App() {
   const [selectedPage, setSelectedPage] = useState<SelectedPage>(
@@ -37,8 +40,27 @@ function App() {
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
+  const [user, setUser] = React.useState(null);
+  // Al cargar la aplicación, intenta recuperar los datos del usuario del almacenamiento local
+  useEffect(() => {
+    const storedUser = window.localStorage.getItem('user');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, []);
+
+  // Cuando el usuario cambia, actualiza el almacenamiento local
+  useEffect(() => {
+    if (user) {
+      window.localStorage.setItem('user', JSON.stringify(user));
+    } else {
+      window.localStorage.removeItem('user');
+    }
+  }, [user]);
+
 
   return (
+    <UserContext.Provider value={{ user, setUser }}>
     <NextUIProvider>
     <Router>
       <Routes>
@@ -71,6 +93,7 @@ function App() {
       </Routes>
     </Router>
     </NextUIProvider>
+    </UserContext.Provider>
   );
 }
 

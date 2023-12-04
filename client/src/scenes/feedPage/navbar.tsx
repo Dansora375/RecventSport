@@ -31,9 +31,25 @@ import { Link } from "react-router-dom";
 
 // import { Dropdown, DropdownDivider, DropdownHeader, DropdownItem } from 'flowbite-react';
 
+import { UserContext } from "@/shared/usercontext";
+import { useContext, useEffect } from "react";
+
+
 type Props = {};
 
 function NavbarEvents({}: Props) {
+  const { user, setUser } = useContext(UserContext);
+  useEffect(() => {
+    const storedUser = window.localStorage.getItem("user");
+    if (storedUser && !user) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, [user, setUser]);
+
+  if (!user) {
+    return <div>Cargando...</div>;
+  }
+
   return (
     <Navbar
       className="bg-gray-20 py-1 drop-shadow"
@@ -121,7 +137,7 @@ function NavbarEvents({}: Props) {
           <MenuList>
             <MenuItem className="flex h-14 flex-col items-start gap-1 rounded-md">
               <p className="text-sm font-semibold">Registrado como</p>
-              <p className="text-sm font-semibold">zoey@example.com</p>
+              <p className="text-sm font-semibold">{user.user.email}</p>
             </MenuItem>
             <MenuItem as="a" href="/perfil" className="rounded-md">
               Mi perfil

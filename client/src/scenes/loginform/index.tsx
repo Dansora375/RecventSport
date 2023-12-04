@@ -7,6 +7,7 @@ import { useCookies } from "react-cookie";
 import { useNavigate } from "react-router-dom";
 import { UserErrors } from "../../../../server/src/errors";
 
+import { UserContext } from "@/shared/usercontext";
 
 type Props = {
     isOpen: boolean;
@@ -25,6 +26,9 @@ const SignIn = ({ isOpen, onClose, signIn, setIsSignIn}: Props) => {
 
     const navigate = useNavigate();
 
+    const {user, setUser} = useContext(UserContext);
+
+
     const handleSubmit = async (event ) => {
         event.preventDefault();
 
@@ -33,10 +37,14 @@ const SignIn = ({ isOpen, onClose, signIn, setIsSignIn}: Props) => {
             email,
             password,
         });
-
+        
         setCookies("access_token", result.data.token);
         window.localStorage.setItem("userID", result.data.userID);
         //setIsAuthenticated(true);
+        setUser(result.data);
+        window.localStorage.setItem('user', JSON.stringify(result.data));
+        // alert(user);
+        alert(user.user.name);
         navigate("/eventos");
         } catch (err) {
         let errorMessage: string = "";
@@ -54,6 +62,7 @@ const SignIn = ({ isOpen, onClose, signIn, setIsSignIn}: Props) => {
         alert("ERROR: " + errorMessage);
         }
     };
+    
 
     const handleSubmit2 = async (event) => {
         event.preventDefault();

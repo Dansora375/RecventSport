@@ -7,7 +7,6 @@ export const useGetposts = () => {
   const fetchposts = async () => {
     const posts = await axios.get("http://localhost:3001/feed/posts");
     setposts(posts.data.posts);
-    console.log("hola ",posts);
   };
 
   useEffect(() => {

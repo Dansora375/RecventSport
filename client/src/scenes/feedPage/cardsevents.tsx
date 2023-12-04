@@ -46,7 +46,7 @@ const Cardsevents = (props: Props) => {
   const [currentPage, setCurrentPage] = useState(1);
 
   // Número de elementos por página
-  const itemsPerPage = 4;
+  const itemsPerPage = 6;
 
   // Función para cambiar a la página siguiente
   const nextPage = () => {
@@ -113,7 +113,7 @@ const Cardsevents = (props: Props) => {
                       alt={item.title}
                     />
                     <p className="ml-5 text-default-500">
-                      {item.num_inte} participantes
+                      {item.num_members} participantes
                     </p>
                   </div>
                   <div className="h-full w-[30%]">
@@ -181,7 +181,6 @@ const Cardsevents = (props: Props) => {
                   <p className="mb-2">
                     <b>Fecha: </b>
                     {selectedItem?.date}
-                    7 de noviembre de 2023
                   </p>
                   <p className="mb-2">
                     <b>Nivel de dificultad: </b>
