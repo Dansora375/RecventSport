@@ -95,25 +95,24 @@ router.post("/create_post", /*verifyToken,*/  async (req: Request , res: Respons
         await newPost.save();
 
 
-//         ///// YA CREAMOS EL POST AHORA SE LO AÑADIMOS AL USUARUIO
-//         const id: string = (await PostModel.findOne({title}))._id;
+        //         ///// YA CREAMOS EL POST AHORA SE LO AÑADIMOS AL USUARUIO
 
-//         let nuevoObjectId = "el nuevo ObjectId que quieres añadir al arreglo";
-
-// PostModel.findOneAndUpdate(
-//     { _id: idDelPost }, 
-//     { $push: { arregloDeObjectIds: nuevoObjectId } },
-//     { new: true }, 
-//     function(err, result) {
-//         if (err) {
-//             console.log("Hubo un error: ", err);
-//         } else {
-//             console.log("Post actualizado exitosamente: ", result);
-//         }
-//     }
-// );
-
+        async function actualizarPost() {
+            const Pid: string = (await PostModel.findOne({title}))._id;
         
+            try {
+                let result = await UserModel.findOneAndUpdate(
+                    { _id: idAuthor }, 
+                    { $push: { posts: Pid } },
+                    { new: true }
+                );
+                console.log("Post actualizado exitosamente: ", result);
+            } catch (err) {
+                console.log("Hubo un error: ", err);
+            }
+        }
+        
+        actualizarPost();
 
         res.json({message: "Event Created"});
 

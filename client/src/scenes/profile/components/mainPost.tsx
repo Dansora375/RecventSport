@@ -12,14 +12,29 @@ import axios from "axios";
 import { IPost } from "../../../../../server/src/models/post";
 import { useGetposts } from "../../../hooks/useGetProducts";
 
+import {Mapgene } from "@/structures/HastTable";
+
+
 interface Props {
   post: IPost;
 }
+
+
+    
 
 export default function MainPost() {
   const [cookies, _] = useCookies(["access_token"]);
 
   const { posts } = useGetposts();
+  const map = new Mapgene<string, IPost>();
+
+  for(const element of posts){
+    map.add(element._id, element)
+    //console.log(element);
+  }
+  console.log(map.get("656cf388ef1b1505fa36bd7"));
+
+  ////
 
   if (!cookies.access_token) {
     return <Navigate to="/" />;
