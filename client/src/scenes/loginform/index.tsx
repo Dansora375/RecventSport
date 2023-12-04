@@ -43,8 +43,6 @@ const SignIn = ({ isOpen, onClose, signIn, setIsSignIn}: Props) => {
         //setIsAuthenticated(true);
         setUser(result.data);
         window.localStorage.setItem('user', JSON.stringify(result.data));
-        // alert(user);
-        alert(user.user.name);
         navigate("/eventos");
         } catch (err) {
         let errorMessage: string = "";

@@ -17,11 +17,13 @@ import {
   useToast,
 } from "@chakra-ui/react";
 
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import axios from "axios";
 import { useCookies } from "react-cookie";
 import { Navigate, useNavigate} from "react-router-dom";
 import { UserErrors } from "../../../../server/src/errors";
+
+import { UserContext } from "@/shared/usercontext";
 
 export function CreateEvent() {
   //Base de datos
@@ -40,6 +42,16 @@ export function CreateEvent() {
   const [isFirstStep, setIsFirstStep] = React.useState(false);
 
   const navigate = useNavigate();
+
+
+  const { user, setUser } = useContext(UserContext);
+  useEffect(() => {
+    const storedUser = window.localStorage.getItem("user");
+    if (storedUser && !user) {
+      setUser(JSON.parse(storedUser));
+    }
+  }, [user, setUser]);
+
 
   // const handleSubmit = async (event) => {
   //   event.preventDefault();
@@ -83,6 +95,7 @@ export function CreateEvent() {
           date,
           city,
           level,
+          idAuthor : user.user._id,
         });
         toast({
           title: 'Evento creado',
